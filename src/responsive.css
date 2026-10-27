@@ -1,0 +1,22 @@
+#welcome[hidden]{display:none}
+.course-panel{scroll-margin-top:195px}
+.favorite[aria-pressed=true]{animation:favorite-pop .2s ease-out}
+@keyframes favorite-pop{50%{transform:scale(1.2)}}
+@media(max-width:520px){
+ .welcome{padding:15px 0;gap:12px}
+ .welcome .eyebrow,.welcome p,.welcome .note-label{display:none}
+ .welcome h1{font-size:18px;line-height:1.5;margin:0;letter-spacing:-.7px}
+ .mobile-break{display:none}
+ .welcome-note{min-width:130px;max-width:130px;padding-left:12px}
+ .welcome-note button{font-size:12px;white-space:nowrap}
+ #course-total{font-size:10px;white-space:nowrap}
+ .situations{padding:11px 0 14px}
+ .situations .chip-row{flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin;padding-bottom:4px}
+ .situations .chip{flex-shrink:0}
+ .filterline{padding-top:12px;align-items:center;gap:8px}
+ #categories{flex-wrap:nowrap;overflow-x:auto;min-width:0;flex:1;padding:3px 0;scrollbar-width:thin}
+ #categories .chip{flex-shrink:0}
+ .results-line{margin:12px 0}
+ .course-panel{scroll-margin-top:170px}
+}
+@media(prefers-reduced-motion:reduce){.favorite[aria-pressed=true]{animation:none}}

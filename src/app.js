@@ -83,7 +83,7 @@ document.addEventListener('click',e=>{
  if(b.hasAttribute('data-reset'))reset();
  if(b.hasAttribute('data-step-change'))stepSim(b.closest('.sim'),Number(b.dataset.stepChange));
  if(b.hasAttribute('data-mode')){const el=b.closest('.sim');el.dataset.mode=b.dataset.mode;el.querySelectorAll('[data-mode]').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-pressed',x===b);});stepSim(el,0);}
- if(b.hasAttribute('data-export')){const url=URL.createObjectURL(new Blob([JSON.stringify({version:1,...record},null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='vibe-guidebook-records.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('학습 기록 파일을 내보냈어요.');}
+ if(b.hasAttribute('data-export')){const url=URL.createObjectURL(new Blob([JSON.stringify({version:1,...record},null,2)],{type:'application/json'}));const a=document.createElement('a');a.href=url;a.download='vibe-guidebook-records.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('기록 파일 다운로드를 요청했어요. 다운로드 폴더를 확인하세요.');}
  if(b.hasAttribute('data-resume')){const id=b.dataset.resume;closeDrawer();detail(id);}
  if(b.hasAttribute('data-related')){tab=b.dataset.related;category='전체';situation='';course=-1;$('#q').value='';closeDrawer();render();}
 });
