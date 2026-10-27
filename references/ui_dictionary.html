@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>바이브 코딩 UI 용어 사전</title>
+<style>
+body{font-family:system-ui,sans-serif;margin:0;background:#f5f6f8;color:#222}
+header{position:sticky;top:0;background:#fff;padding:12px 16px;box-shadow:0 1px 4px #0002;z-index:10}
+h1{font-size:18px;margin:0 0 8px}
+#q{width:100%;box-sizing:border-box;padding:12px;font-size:16px;border:2px solid #c7d2fe;border-radius:10px}
+.chips{margin-top:8px;display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+.chips button{padding:5px 12px;border:1px solid #ddd;border-radius:20px;background:#fff;cursor:pointer}
+.chips button.on{background:#4f46e5;color:#fff;border-color:#4f46e5}
+#cnt{margin-left:auto;font-size:13px;color:#666}
+main{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px;padding:16px}
+.card{background:#fff;border-radius:12px;padding:16px;box-shadow:0 1px 3px #0002}
+.card h3{margin:6px 0 2px}.card h3 small{color:#4f46e5;font-weight:500}
+.badge{font-size:11px;background:#eef2ff;color:#4f46e5;padding:2px 8px;border-radius:10px}
+.desc{margin:4px 0;color:#555;font-size:14px}
+.demo{position:relative;overflow:hidden;height:190px;border:1px dashed #cbd5e1;border-radius:8px;margin:10px 0;background:#fafafa}
+label{display:block;font-size:12px;color:#888;margin-top:8px}
+.cp{background:#eef4ff;padding:8px;border-radius:6px;font-size:14px;cursor:pointer;margin-top:2px}
+.cp:hover{background:#dde8ff}.cp.ok::after{content:'  ✓ 복사됨';color:#16a34a;font-weight:bold}
+code{display:block;background:#1e293b;color:#a5f3fc;padding:6px 8px;border-radius:6px;font-size:13px;margin-top:2px}
+/* ---- 데모용 스타일 ---- */
+.full{height:100%}.center{height:100%;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn{padding:6px 12px;border:0;border-radius:6px;background:#4f46e5;color:#fff;cursor:pointer}
+.hint{position:absolute;bottom:4px;right:8px;font-size:12px;color:#888}
+.hero{display:flex;flex-direction:column;justify-content:center;align-items:center;gap:4px;background:linear-gradient(135deg,#6366f1,#ec4899);color:#fff}
+.bx{background:#c7d2fe;border-radius:6px;display:flex;align-items:center;justify-content:center;min-height:40px}
+.resp{display:grid;grid-template-columns:repeat(auto-fit,minmax(80px,1fr));gap:6px;padding:8px;resize:horizontal;overflow:auto;width:100%;box-sizing:border-box;border-right:3px solid #4f46e5}
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:10px}
+.mini{background:#fff;border:1px solid #e5e7eb;border-radius:8px;padding:10px;font-size:13px}
+.img{height:40px;background:#e0e7ff;border-radius:4px;margin-bottom:4px}
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:1fr 1fr;gap:6px;padding:8px;height:100%;box-sizing:border-box}
+.side{width:35%;background:#1e293b;color:#fff;padding:10px;font-size:13px}
+.scr{height:100%;overflow:auto}.scr p{margin:8px 12px}
+.sth{position:sticky;top:0;background:#4f46e5;color:#fff;padding:8px;z-index:1}
+.tabs{display:flex;border-bottom:1px solid #ddd}
+.tabs button{flex:1;padding:10px;border:0;background:none;cursor:pointer;border-bottom:3px solid transparent}
+.tabs .on{border-color:#4f46e5;color:#4f46e5;font-weight:bold}.tc{padding:16px}
+details{border-bottom:1px solid #ddd;padding:6px}summary{cursor:pointer;font-weight:600}details p{margin:6px 0;font-size:13px}
+.ov{position:absolute;inset:0;background:#0007;display:none;align-items:center;justify-content:center}.ov.open{display:flex}
+.dlg{background:#fff;padding:16px;border-radius:10px;text-align:center}
+.dr{position:absolute;top:0;right:0;height:100%;width:60%;box-sizing:border-box;background:#fff;box-shadow:-2px 0 8px #0003;transform:translateX(100%);transition:transform .3s;padding:10px}.dr.open{transform:none}
+.dd{position:absolute;top:44px;left:12px;background:#fff;border:1px solid #ddd;border-radius:6px;box-shadow:0 4px 12px #0002;display:none;min-width:120px}.dd.open{display:block}
+.dd div{padding:8px 12px;cursor:pointer}.dd div:hover{background:#f1f5f9}
+.tip{position:relative;font-size:28px;cursor:help}
+.tip:hover::after{content:attr(data-tip);position:absolute;bottom:110%;left:50%;transform:translateX(-50%);background:#333;color:#fff;font-size:12px;padding:4px 8px;border-radius:4px;white-space:nowrap}
+.ts{position:absolute;bottom:12px;left:50%;transform:translate(-50%,20px);opacity:0;transition:.3s;background:#333;color:#fff;padding:6px 14px;border-radius:6px}.ts.show{opacity:1;transform:translate(-50%,0)}
+.car{position:relative;height:100%;overflow:hidden}.trk{display:flex;height:100%;transition:transform .4s}
+.sl{flex:0 0 100%;display:flex;align-items:center;justify-content:center;font-weight:bold}
+.pv,.nx{position:absolute;top:50%;transform:translateY(-50%)}.pv{left:6px}.nx{right:6px}
+@keyframes shimmer{to{background-position:-200% 0}}
+.sk{background:linear-gradient(90deg,#e5e7eb 25%,#f8fafc 50%,#e5e7eb 75%);background-size:200% 100%;animation:shimmer 1.2s infinite;border-radius:6px}
+.hov{transition:.2s}.hov:hover{transform:translateY(-4px);box-shadow:0 8px 16px #0002}
+.rv{opacity:0;transform:translateY(20px);transition:.6s}.rv.on{opacity:1;transform:none}
+@keyframes up{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+.st{opacity:0;animation:up .4s forwards}.replay{position:absolute;bottom:6px;right:6px}
+.tb{width:50px;height:50px;background:#a5b4fc;border-radius:8px;transition:all .4s ease}.tb.on{width:100px;background:#ec4899;border-radius:25px}
+.glassbg{display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 30% 30%,#f472b6 0 22%,transparent 23%),radial-gradient(circle at 70% 70%,#60a5fa 0 22%,transparent 23%),#1e1b4b}
+.glass{background:rgba(255,255,255,.15);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.3);color:#fff;padding:16px 24px;border-radius:12px}
+.plx{position:absolute;top:0;left:0;right:0;height:300px;background:radial-gradient(circle at 20% 20%,#fde68a 0 12%,transparent 13%),radial-gradient(circle at 80% 40%,#a5b4fc 0 15%,transparent 16%),#e0f2fe}
+.snap{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding:10px;height:100%;box-sizing:border-box}
+.snap .sl{flex:0 0 80%;scroll-snap-align:center;border-radius:8px}
+.heart{font-size:34px;background:none;border:0;cursor:pointer;color:#e11d48}
+.pop{animation:pop .3s}@keyframes pop{50%{transform:scale(1.4)}}
+</style>
+</head>
+<body>
+<header>
+  <h1>🧩 바이브 코딩 UI 용어 사전</h1>
+  <input id="q" placeholder="영어·한글 용어 또는 생김새로 검색 (예: drawer, 드로어, 옆에서 나오는, 로딩, 팝업)  —  단축키 /">
+  <div class="chips" id="chips"><span id="cnt"></span></div>
+</header>
+<main id="main"></main>
+
+<script>
+// [id, 분류, 영어, 한글, 검색용 일상어, 설명, 만들기 프롬프트, 수정 프롬프트, 코드에서 찾을 단어]
+const RAW=[
+['hero','레이아웃','Hero Section','히어로 섹션','첫화면 메인화면 대문 배너 맨위 큰제목 시작버튼 CTA 랜딩','접속하자마자 보이는 첫 소개 영역','첫 화면에 짧은 제목, 설명, CTA 버튼, 제품 이미지가 있는 히어로 섹션을 만들어줘','히어로 섹션의 CTA 버튼을 더 크게 하고 배경을 그라데이션으로 바꿔줘','hero, h1, cta, min-h-screen'],
+['responsive','레이아웃','Responsive Layout','반응형 레이아웃','모바일 화면깨짐 폰에서 태블릿 화면크기 줄이면 열개수','화면 너비에 맞춰 배치가 바뀜','카드를 데스크톱 3열, 태블릿 2열, 모바일 1열로 배치되는 반응형 레이아웃으로 만들어줘','모바일에서 레이아웃이 깨져. 768px 이하에서는 1열로 바꿔줘','@media, md:, lg:, grid-cols, flex-wrap'],
+['card','레이아웃','Card Layout','카드 레이아웃','박스 상자 목록 썸네일 상품목록 블로그목록','정보를 같은 모양 박스로 나눠 나열','상품을 이미지·제목·가격이 있는 카드 레이아웃으로 보여줘','카드 간격을 넓히고 모서리를 둥글게, 그림자를 은은하게 바꿔줘','card, grid, gap, rounded, shadow'],
+['bento','레이아웃','Bento Grid','벤토 그리드','크기다른카드 도시락 애플스타일 기능소개 큰칸 작은칸 불규칙','크기가 다른 칸을 퍼즐처럼 조합','주요 기능 5개를 벤토 그리드로 배치하고 가장 중요한 기능은 2칸 크기로 해줘','벤토 그리드에서 첫 번째 칸을 가로 2칸, 세로 2칸으로 키워줘','grid, col-span, row-span, grid-template-areas'],
+['sidebar','레이아웃','Sidebar Layout','사이드바 레이아웃','왼쪽메뉴 옆메뉴 관리자 대시보드 네비게이션','한쪽에 고정 메뉴, 나머지는 본문','왼쪽에 메뉴 사이드바, 오른쪽에 본문이 있는 대시보드 레이아웃을 만들어줘. 모바일에서는 사이드바를 숨겨줘','사이드바를 접었다 펼 수 있게 토글 버튼을 추가해줘','aside, sidebar, nav, w-64'],
+['sticky','레이아웃','Sticky Header','스티키 헤더','상단고정 메뉴바고정 스크롤해도 따라오는 헤더 붙어있는','스크롤해도 위에 붙어 있는 헤더','스크롤해도 상단에 고정되는 스티키 헤더를 만들고, 스크롤하면 배경이 살짝 불투명해지게 해줘','헤더가 스크롤하면 사라져. 상단에 고정(sticky)되게 고쳐줘','position: sticky, sticky top-0, fixed, z-index'],
+['split','레이아웃','Split Layout','스플릿 레이아웃','반반 좌우분할 왼쪽글 오른쪽이미지 두칸 로그인화면','화면을 좌우 둘로 나눔','왼쪽은 설명과 버튼, 오른쪽은 이미지가 있는 스플릿 레이아웃을 만들어줘. 모바일에서는 위아래로 쌓아줘','스플릿 레이아웃 좌우 비율을 6:4로 바꿔줘','grid-cols-2, flex, w-1/2, md:flex-row'],
+['tabs','UI 컴포넌트','Tabs','탭','메뉴전환 눌러서 내용바뀜 가로메뉴 카테고리전환','같은 자리에서 내용을 전환','요금제 정보를 월간/연간/기업 탭으로 나눠 전환되게 해줘','선택된 탭에 밑줄 표시와 전환 애니메이션을 넣어줘','tab, role="tablist", activeTab, aria-selected'],
+['accordion','UI 컴포넌트','Accordion','아코디언','접기 펼치기 FAQ 자주묻는질문 질문누르면 답','제목을 누르면 내용이 펼쳐짐','FAQ를 아코디언으로 만들어줘. 하나를 열면 나머지는 닫히게 해줘','아코디언 펼칠 때 부드럽게 열리고 화살표가 회전하게 해줘','details, summary, accordion, isOpen, collapse'],
+['modal','UI 컴포넌트','Modal / Dialog','모달 / 다이얼로그','팝업 가운데창 확인창 레이어팝업 배경어둡게','화면 가운데 뜨는 창, 뒤는 어둡게','삭제 버튼을 누르면 확인 모달을 띄우고, 바깥 클릭이나 ESC로 닫히게 해줘','모달 뒤 배경을 흐리게(blur) 하고 열릴 때 살짝 커지며 나타나게 해줘','modal, dialog, overlay, backdrop, isOpen'],
+['drawer','UI 컴포넌트','Drawer','드로어','옆에서나오는 패널 슬라이드메뉴 햄버거메뉴 오른쪽패널 서랍','화면 옆에서 밀려 나오는 패널','설정 버튼을 누르면 오른쪽 드로어가 열리고 ESC나 바깥 클릭으로 닫히게 해줘','드로어 너비를 모바일에서는 화면 전체로 바꿔줘','drawer, sheet, translate-x, offcanvas'],
+['dropdown','UI 컴포넌트','Dropdown','드롭다운','펼침메뉴 선택목록 아래로열리는 메뉴 더보기 프로필메뉴','버튼 아래로 목록이 펼쳐짐','프로필 아이콘을 누르면 내 정보/설정/로그아웃 드롭다운이 열리게 해줘','드롭다운 바깥을 클릭하면 닫히게 고쳐줘','dropdown, menu, select, popover'],
+['tooltip','UI 컴포넌트','Tooltip','툴팁','마우스올리면 설명 말풍선 도움말 물음표아이콘','마우스를 올리면 뜨는 작은 설명','아이콘 버튼에 마우스를 올리면 기능 이름이 툴팁으로 보이게 해줘','툴팁이 0.3초 뒤에 나타나고 화살표 꼬리가 있게 해줘','tooltip, title=, data-tip, :hover::after'],
+['toast','UI 컴포넌트','Toast / Snackbar','토스트 / 스낵바','알림 저장완료 잠깐떴다사라지는 메시지 하단알림','잠깐 떴다 사라지는 알림','저장 버튼을 누르면 하단에 "저장되었습니다" 토스트를 3초간 보여줘','토스트 위치를 오른쪽 위로 옮기고 성공은 초록, 실패는 빨강으로 해줘','toast, snackbar, sonner, notification, setTimeout'],
+['carousel','UI 컴포넌트','Carousel','캐러셀','슬라이드 배너넘기기 이미지슬라이더 좌우화살표 자동넘김','좌우로 넘기는 슬라이드','후기 카드를 좌우 화살표로 넘기는 캐러셀로 만들고 5초마다 자동으로 넘어가게 해줘','캐러셀 아래에 현재 위치 점(dot) 표시를 추가해줘','carousel, slider, swiper, translateX, currentIndex'],
+['skeleton','UI 컴포넌트','Skeleton Loading','스켈레톤 로딩','로딩중 회색박스 반짝이는 자리표시 빈화면대신','로딩 중 콘텐츠 모양의 회색 틀','데이터를 불러오는 동안 카드 모양의 스켈레톤 로딩을 보여줘','로딩 스피너 대신 스켈레톤으로 바꾸고 반짝이는(shimmer) 효과를 넣어줘','skeleton, loading, isLoading, animate-pulse, shimmer'],
+['hover','효과·인터랙션','Hover Effect','호버 효과','마우스올리면 커짐 떠오름 색바뀜 반응','마우스를 올렸을 때의 변화','카드에 마우스를 올리면 살짝 떠오르고 그림자가 진해지는 호버 효과를 넣어줘','호버 효과가 너무 과해. 이동 거리를 4px로 줄여줘','":hover", hover:, transform, scale'],
+['reveal','효과·인터랙션','Scroll Reveal','스크롤 리빌','스크롤하면 나타남 내리면등장 페이드인','스크롤해서 보일 때 나타남','섹션이 화면에 들어올 때 아래에서 위로 페이드인되는 스크롤 리빌을 넣어줘','스크롤 리빌이 한 번만 실행되게 해줘','IntersectionObserver, whileInView, AOS, data-aos'],
+['stagger','효과·인터랙션','Stagger Animation','스태거 애니메이션','순서대로 하나씩 차례로등장 시간차','여러 요소가 시간차로 하나씩 등장','카드들이 0.1초 간격으로 하나씩 나타나는 스태거 애니메이션을 넣어줘','스태거 간격을 0.15초로 늘려줘','animation-delay, staggerChildren, transition-delay'],
+['transition','효과·인터랙션','Smooth Transition','스무스 트랜지션','부드럽게바뀜 뚝끊김 자연스럽게 서서히','상태가 바뀔 때 부드럽게 변함','버튼 색과 크기가 바뀔 때 200ms 동안 부드럽게 전환되게 해줘','다크모드 전환이 뚝 끊겨. 부드러운 트랜지션을 넣어줘','transition, duration-200, ease, ease-in-out'],
+['glass','효과·인터랙션','Glassmorphism','글래스모피즘','유리 반투명 뿌연배경 블러 흐림','뒤가 흐리게 비치는 유리 느낌','헤더와 카드에 반투명 배경과 블러가 있는 글래스모피즘을 적용해줘. 글자 대비는 충분히 확보해줘','글래스 카드의 글자가 잘 안 보여. 배경 불투명도를 높여줘','backdrop-filter, backdrop-blur, bg-white/10, rgba'],
+['parallax','효과·인터랙션','Parallax Scrolling','패럴랙스 스크롤','배경이천천히 움직임 깊이감 입체감 시차','배경과 전경이 다른 속도로 움직임','히어로 배경이 스크롤보다 느리게 움직이는 은은한 패럴랙스를 넣고, 모바일과 동작 줄이기 설정에서는 꺼줘','패럴랙스 강도를 절반으로 줄여줘','parallax, scrollY, useScroll, prefers-reduced-motion'],
+['snap','효과·인터랙션','Scroll Snap','스크롤 스냅','딱딱맞춰멈춤 한페이지씩 풀페이지 가로스크롤','스크롤이 칸에 맞춰 딱 멈춤','섹션마다 스크롤이 딱 맞춰 멈추는 스크롤 스냅을 적용해줘','가로 카드 목록에 스크롤 스냅을 넣어서 카드가 반쯤 걸치지 않게 해줘','scroll-snap-type, snap-x, snap-mandatory, snap-start'],
+['micro','효과·인터랙션','Micro-interaction','마이크로 인터랙션','좋아요 하트 버튼누르면 톡 작은반응 피드백 토글','클릭 등 작은 행동에 대한 작은 반응','좋아요 버튼을 누르면 하트가 살짝 커졌다 작아지며 색이 채워지게 해줘','복사 버튼을 누르면 아이콘이 체크로 바뀌었다 돌아오게 해줘','@keyframes, scale, active:, onClick']
+];
+const T=RAW.map(([id,cat,en,ko,tags,desc,prompt,edit,code])=>({id,cat,en,ko,tags,desc,prompt,edit,code}));
+const rep=(n,f)=>Array.from({length:n},(_,i)=>f(i)).join('');
+
+// ---- 작동 데모 ----
+const D={
+hero:e=>e.innerHTML=`<div class="full hero"><b style="font-size:20px">AI로 1분 만에 웹사이트</b><small>짧은 설명 문구</small><button class="btn">무료로 시작하기</button></div>`,
+responsive:e=>e.innerHTML=`<div class="resp">${rep(6,i=>`<div class="bx">${i+1}</div>`)}</div><span class="hint">↘ 파란 테두리 모서리를 끌어 너비를 줄여보세요</span>`,
+card:e=>e.innerHTML=`<div class="g3">${rep(3,i=>`<div class="mini"><div class="img"></div>상품 ${i+1}<br><small>₩9,900</small></div>`)}</div>`,
+bento:e=>e.innerHTML=`<div class="bento"><div class="bx" style="grid-column:span 2;grid-row:span 2">핵심 기능</div><div class="bx">B</div><div class="bx">C</div><div class="bx" style="grid-column:span 2">D</div></div>`,
+sidebar:e=>e.innerHTML=`<div class="full" style="display:flex"><aside class="side">메뉴<br>• 홈<br>• 통계<br>• 설정</aside><div style="padding:10px">본문 영역</div></div>`,
+sticky:e=>e.innerHTML=`<div class="scr"><div class="sth">스티키 헤더</div>${rep(12,i=>`<p>본문 ${i+1} — 스크롤해 보세요</p>`)}</div>`,
+split:e=>e.innerHTML=`<div class="full" style="display:grid;grid-template-columns:1fr 1fr"><div style="padding:12px"><b>제목</b><br><small>설명과 버튼</small><br><br><button class="btn">시작</button></div><div style="background:linear-gradient(135deg,#a5b4fc,#f9a8d4)"></div></div>`,
+tabs:e=>{const t=['월간','연간','기업'];e.innerHTML=`<div class="tabs">${t.map((x,i)=>`<button data-i="${i}" class="${i?'':'on'}">${x}</button>`).join('')}</div><div class="tc">월간 요금 내용</div>`;const c=e.querySelector('.tc'),bs=e.querySelectorAll('.tabs button');bs.forEach(b=>b.onclick=()=>{bs.forEach(x=>x.classList.remove('on'));b.classList.add('on');c.textContent=t[b.dataset.i]+' 요금 내용'})},
+accordion:e=>e.innerHTML=`<div style="padding:8px">${['배송은 얼마나 걸리나요?','환불되나요?','회원가입이 필요한가요?'].map(q=>`<details name="acc-demo"><summary>${q}</summary><p>답변 내용이 여기에 펼쳐집니다.</p></details>`).join('')}</div>`,
+modal:e=>{e.innerHTML=`<div class="center"><button class="btn op">삭제</button></div><div class="ov"><div class="dlg">정말 삭제할까요?<br><br><button class="btn x">닫기</button></div></div>`;const o=e.querySelector('.ov');e.querySelector('.op').onclick=()=>o.classList.add('open');o.onclick=v=>{if(v.target===o||v.target.classList.contains('x'))o.classList.remove('open')}},
+drawer:e=>{e.innerHTML=`<div class="center"><button class="btn op">⚙ 설정</button></div><div class="dr"><b>설정</b><p>알림 켜기<br>다크 모드</p><button class="btn x">닫기</button></div>`;const d=e.querySelector('.dr');e.querySelector('.op').onclick=()=>d.classList.add('open');d.querySelector('.x').onclick=()=>d.classList.remove('open')},
+dropdown:e=>{e.innerHTML=`<div style="padding:12px"><button class="btn">내 계정 ▾</button><div class="dd"><div>내 정보</div><div>설정</div><div>로그아웃</div></div></div>`;const m=e.querySelector('.dd');e.querySelector('.btn').onclick=v=>{v.stopPropagation();m.classList.toggle('open')};e.onclick=()=>m.classList.remove('open')},
+tooltip:e=>e.innerHTML=`<div class="center"><span class="tip" data-tip="파일 저장하기">💾</span> ← 마우스를 올려보세요</div>`,
+toast:e=>{e.innerHTML=`<div class="center"><button class="btn">저장</button></div><div class="ts">저장되었습니다 ✓</div>`;const t=e.querySelector('.ts');e.querySelector('.btn').onclick=()=>{t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),3000)}},
+carousel:e=>{e.innerHTML=`<div class="car"><div class="trk">${rep(4,i=>`<div class="sl" style="background:hsl(${i*70+200},70%,78%)">슬라이드 ${i+1}</div>`)}</div><button class="btn pv">‹</button><button class="btn nx">›</button></div>`;let i=0;const k=e.querySelector('.trk'),go=d=>{i=(i+d+4)%4;k.style.transform=`translateX(-${i*100}%)`};e.querySelector('.pv').onclick=()=>go(-1);e.querySelector('.nx').onclick=()=>go(1)},
+skeleton:e=>e.innerHTML=`<div style="padding:16px;display:flex;gap:12px"><div class="sk" style="width:60px;height:60px;border-radius:50%"></div><div style="flex:1"><div class="sk" style="height:14px;margin-bottom:10px"></div><div class="sk" style="height:14px;width:70%;margin-bottom:10px"></div><div class="sk" style="height:14px;width:40%"></div></div></div>`,
+hover:e=>e.innerHTML=`<div class="g3">${rep(3,i=>`<div class="mini hov">카드 ${i+1}</div>`)}</div><span class="hint">마우스를 올려보세요</span>`,
+reveal:e=>{e.innerHTML=`<div class="scr"><p style="color:#888">↓ 스크롤해 보세요</p><div style="height:150px"></div>${rep(4,i=>`<div class="mini rv" style="margin:10px">섹션 ${i+1}</div>`)}</div>`;const r=e.querySelector('.scr'),io=new IntersectionObserver(es=>es.forEach(x=>x.isIntersecting&&x.target.classList.add('on')),{root:r,threshold:.3});r.querySelectorAll('.rv').forEach(x=>io.observe(x))},
+stagger:e=>{const p=()=>{e.innerHTML=`<div class="g3">${rep(6,i=>`<div class="mini st" style="animation-delay:${i*0.1}s">${i+1}</div>`)}</div><button class="btn replay">↻ 다시 재생</button>`;e.querySelector('.replay').onclick=p};p()},
+transition:e=>{e.innerHTML=`<div class="center"><div class="tb"></div><button class="btn">바꾸기</button></div>`;e.querySelector('.btn').onclick=()=>e.querySelector('.tb').classList.toggle('on')},
+glass:e=>e.innerHTML=`<div class="full glassbg"><div class="glass">글래스 카드<br><small>뒤 배경이 흐리게 비쳐요</small></div></div>`,
+parallax:e=>{e.innerHTML=`<div class="scr" style="position:relative"><div class="plx"></div><div style="position:relative;padding-top:70px">${rep(8,i=>`<div class="mini" style="margin:10px">콘텐츠 ${i+1} — 스크롤하면 배경이 느리게 움직여요</div>`)}</div></div>`;const s=e.querySelector('.scr'),b=e.querySelector('.plx');s.onscroll=()=>b.style.transform=`translateY(${s.scrollTop*0.6}px)`},
+snap:e=>e.innerHTML=`<div class="snap">${rep(5,i=>`<div class="sl" style="background:hsl(${i*60},70%,82%)">카드 ${i+1}</div>`)}</div><span class="hint">← 옆으로 스크롤해 보세요 →</span>`,
+micro:e=>{e.innerHTML=`<div class="center"><button class="heart">♡</button><span style="color:#888">눌러보세요</span></div>`;const h=e.querySelector('.heart');h.onclick=()=>{h.classList.toggle('on');h.textContent=h.classList.contains('on')?'♥':'♡';h.classList.remove('pop');void h.offsetWidth;h.classList.add('pop')}}
+};
+
+// ---- 검색 / 렌더링 ----
+const q=document.getElementById('q'),main=document.getElementById('main'),cnt=document.getElementById('cnt'),chips=document.getElementById('chips');
+let cat='전체';
+['전체','레이아웃','UI 컴포넌트','효과·인터랙션'].forEach(c=>{const b=document.createElement('button');b.textContent=c;if(c===cat)b.className='on';b.onclick=()=>{cat=c;chips.querySelectorAll('button').forEach(x=>x.classList.toggle('on',x===b));render()};chips.insertBefore(b,cnt)});
+const norm=s=>s.toLowerCase().replace(/[\s\/\-·]/g,'');
+function render(){
+  const ws=q.value.trim().split(/\s+/).filter(Boolean).map(norm);
+  const list=T.filter(t=>(cat==='전체'||t.cat===cat)&&ws.every(w=>norm(Object.values(t).join(' ')).includes(w)));
+  main.innerHTML=list.map(t=>`<article class="card">
+    <span class="badge">${t.cat}</span>
+    <h3>${t.ko} <small>${t.en}</small></h3>
+    <p class="desc">${t.desc}</p>
+    <div class="demo" data-id="${t.id}"></div>
+    <label>🛠 만들기 프롬프트 (클릭 → 복사)</label><div class="cp">${t.prompt}</div>
+    <label>✏️ 수정 프롬프트 (클릭 → 복사)</label><div class="cp">${t.edit}</div>
+    <label>🔍 코드에서 찾을 단어 (에디터 Ctrl+F)</label><code>${t.code}</code>
+  </article>`).join('')||'<p>결과가 없어요. 생김새로 검색해 보세요 (예: 팝업, 슬라이드, 알림, 로딩)</p>';
+  main.querySelectorAll('.demo').forEach(d=>D[d.dataset.id](d));
+  cnt.textContent=list.length+'개';
+}
+q.oninput=render;
+main.addEventListener('click',e=>{const p=e.target.closest('.cp');if(!p)return;navigator.clipboard.writeText(p.textContent.trim());p.classList.add('ok');setTimeout(()=>p.classList.remove('ok'),1200)});
+document.addEventListener('keydown',e=>{
+  if(e.key==='Escape')document.querySelectorAll('.dr.open,.ov.open,.dd.open').forEach(x=>x.classList.remove('open'));
+  if(e.key==='/'&&document.activeElement!==q){e.preventDefault();q.focus()}
+});
+render();
+</script>
+</body>
+</html>

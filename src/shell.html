@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#17685b"><meta name="description" content="보고, 눌러 보고, 바로 요청하는 나만의 바이브 코딩 가이드북. UI 체험과 Codex 요청문, 기초 개념과 스킬을 한곳에서."><title>나의 바이브 코딩 가이드북</title><style>/*APP_CSS*/</style></head>
+<body>
+<a class="skip" href="#main">카드 목록으로 이동</a>
+<header class="header"><div class="wrap">
+ <div class="brandline"><a class="brand" href="#" aria-label="가이드북 처음으로"><span class="brand-icon" aria-hidden="true">v.</span><span>나의 바이브 코딩 <b>가이드북</b></span></a><div class="header-actions"><span class="local-label">로그인 없이 · 기기별 기록</span><button id="records" class="icon-btn" aria-label="학습 기록 관리">기록 관리</button></div></div>
+ <div class="searchline"><label class="search"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input id="q" type="search" placeholder="이름 몰라도 괜찮아요. ‘옆에서 나오는 메뉴’, ‘오류가 안 고쳐져’" autocomplete="off" aria-label="용어와 상황 검색"><kbd>/</kbd></label></div>
+ <nav id="tabs" class="tabs-main" aria-label="가이드 종류"></nav>
+</div></header>
+<div class="wrap page">
+ <section id="welcome" class="welcome"><div><span class="eyebrow">MY CODING FIELD GUIDE</span><h1>읽는 것에서,<br class="mobile-break"> 직접 해보는 것으로.</h1><p>모르는 용어는 눈으로 확인하고, 필요한 요청문은 꺼내 쓰세요.</p></div><div class="welcome-note"><span class="note-label">처음이라면 여기부터</span><button id="start-course">6단계 입문 코스 시작 <span aria-hidden="true">↗</span></button><span id="course-total">내 속도로, 한 카드씩.</span></div></section>
+ <section class="situations" aria-label="상황별 도우미"><div class="section-label">지금 어떤 상황인가요?</div><div id="situations" class="chip-row"></div></section>
+ <section id="course-panel" class="course-panel" hidden><div class="section-heading"><div><span class="eyebrow">START SMALL</span><h2>바이브 코딩 입문 코스</h2></div><button id="exit-course" class="quiet">전체 카드 보기</button></div><div id="course-list" class="course-list"></div><div id="course-guidance" class="course-guidance"></div></section>
+ <section aria-label="카드 찾아보기"><div class="filterline"><div id="categories" class="chip-row" aria-label="세부 분류"></div><label class="select-label">정렬 <select id="sort"><option value="default">기본 순서</option><option value="name">이름순</option><option value="unfinished">미완료 먼저</option></select></label></div><div class="results-line"><h2 id="list-title">전체 가이드</h2><span id="count" role="status" aria-live="polite"></span><button id="clear" class="quiet" hidden>조건 초기화</button></div><p id="context-note" class="context-note"></p><main id="main" class="cards"></main></section>
+ <footer><div><b>나의 바이브 코딩 가이드북</b><p>체험은 학습용 예시입니다. 실제 AI·GitHub를 실행하거나 회사 자료를 전송하지 않습니다.</p></div><div>자료 확인 2026.10.27<br><button id="about" class="quiet">출처와 사용 안내</button></div></footer>
+</div>
+<dialog id="drawer" class="drawer" aria-labelledby="drawer-title"><div class="drawer-top"><span id="drawer-badge" class="eyebrow"></span><button id="close-drawer" class="icon-btn" aria-label="상세 창 닫기">닫기 <span aria-hidden="true">×</span></button></div><div id="drawer-body"></div></dialog>
+<div id="toast" class="app-toast" role="status" aria-live="polite"></div>
+<script>/*APP_DATA*/
+/*APP_JS*/</script>
+</body></html>

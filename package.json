@@ -1,0 +1,1 @@
+{"name":"vibe-guidebook","version":"1.0.0","private":true,"type":"module","scripts":{"build":"node build.mjs","check":"node --check src/app.js && node build.mjs","preview":"python -m http.server 8877 --directory dist"}}
