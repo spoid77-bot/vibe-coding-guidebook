@@ -19,6 +19,18 @@
 .workspace .situations{border:0;padding-top:21px;padding-bottom:12px}
 .situation-heading{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
 .situation-heading h1{font-size:19px;margin:0;line-height:1.4;letter-spacing:-.6px}
+.heading-title{display:flex;align-items:center;gap:6px 12px;flex-wrap:wrap}
+#release-badge{font-size:10px;color:#51704d;border:1px solid #d5e0cd;background:#eff5e8;padding:2px 7px;border-radius:5px;white-space:nowrap}
+.extension-paper>div{font-size:10px;line-height:1.7;margin-top:3px}
+.extension-package{background:#fff;border:2px solid #baceaa;border-radius:7px;padding:8px}
+.extension-package>div{display:flex;gap:5px;margin:7px 0}
+.extension-package b{flex:1;background:#eaf2e3;border:1px solid #d2dfc6;padding:7px 3px;text-align:center;border-radius:4px;font-size:10px}
+.extension-package small{font-size:9px;color:#7d896e}
+.experience[data-kind=agent] .exp-choices{margin-bottom:4px}
+.experience[data-kind=agent] .request-bubble{padding:2px 6px;font-size:9px;line-height:1.4;margin-bottom:4px}
+.experience[data-kind=agent] .prototype-table{margin-top:0}
+.experience[data-kind=agent] .prototype-table>div{padding:2px 6px;font-size:9px;line-height:1.4}
+.experience[data-kind=agent] .exp-actions{margin-top:4px}
 #mobile-menu{display:none}
 .workspace .situations .chip-row{gap:6px;flex-wrap:wrap}
 .workspace .situation{font-size:11px;padding:4px 10px;background:#fff;border-color:#dce3d6}

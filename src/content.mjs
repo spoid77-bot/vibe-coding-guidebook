@@ -76,9 +76,9 @@ export const skillSteps={
  'mcp-builder':[['연결 설계','어떤 서비스의 어떤 기능을 도구로 제공할지 정합니다.'],['도구 구현','권한과 입력·응답·실패 처리를 구현합니다.'],['검사·평가','도구 동작과 실제 작업 수행을 확인합니다.']]
 };
 export const courses=[
- {title:'01. AI에게 제대로 부탁하기',desc:'목적과 확인 기준을 먼저 정해요.',ids:['base-vibe','base-prompt','skill-grill-me']},
+ {title:'01. AI에게 제대로 부탁하기',desc:'답변과 실행을 구분하고 확인 기준을 정해요.',ids:['base-vibe','base-agent','base-extensions','base-prompt','skill-grill-me']},
  {title:'02. 화면이 만들어지는 원리',desc:'구조·모양·동작의 역할을 구분해요.',ids:['base-html','base-css','base-javascript','ui-responsive']},
- {title:'03. 원하는 화면 설명하기',desc:'UI를 직접 만져 보고 이름을 익혀요.',ids:['ui-card','ui-modal','ui-drawer','skill-prototype']},
+ {title:'03. 원하는 화면 설명하기',desc:'UI와 움직임을 직접 조절하고 설명해요.',ids:['ui-card','ui-modal','ui-drawer','ui-transition','ui-stagger','skill-prototype']},
  {title:'04. 데이터와 서버 이해하기',desc:'보이는 화면과 실제 저장은 달라요.',ids:['base-frontend','base-backend','base-api']},
  {title:'05. 오류 고치고 확인하기',desc:'재현·원인·검증을 함께 챙겨요.',ids:['base-debug','skill-systematic-debugging','base-test','skill-verification','extra-webapp']},
  {title:'06. 기록하고 공개하기',desc:'변경을 남기고 배포한 주소를 확인해요.',ids:['base-git','base-branch','base-github','base-deploy','base-context']}

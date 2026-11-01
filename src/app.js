@@ -8,7 +8,7 @@ function save(){try{localStorage.setItem(KEY,JSON.stringify(record));}catch{stor
 function toast(text){$('#toast').textContent=text;$('#toast').classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>$('#toast').classList.remove('show'),2800);}
 const tabs=['전체','기초 개념','UI 용어','스킬','즐겨찾기'];
 const situations=[
- ['어디서 시작하지?',['base-vibe','base-prompt','skill-grill-me','skill-to-spec','skill-prototype']],
+ ['어디서 시작하지?',['base-vibe','base-agent','base-prompt','skill-grill-me','skill-to-spec','skill-prototype']],
  ['원하는 화면을 설명하고 싶어',['ui-responsive','ui-card','ui-modal','ui-drawer','ui-tabs','ui-stagger','skill-frontend-design']],
  ['오류가 안 고쳐져',['base-debug','skill-diagnosing-bugs','skill-systematic-debugging','skill-tdd']],
  ['다 됐다는데 안 돼',['base-test','skill-verification','extra-webapp','extra-guidelines']],
@@ -22,7 +22,9 @@ const situations=[
  ['할 일이 너무 커 보여',['skill-to-tickets','skill-to-spec','skill-implement-spec']],
  ['무엇이 바뀌었는지 보고 싶어',['base-git','base-branch','skill-code-review','skill-pr']],
  ['설명이 너무 어려워',['skill-wait-what','base-context','base-frontend','base-backend']],
- ['같은 일을 매번 설명해',['base-skill','skill-skill-creator','skill-handoff']]
+ ['같은 일을 매번 설명해',['base-skill','skill-skill-creator','skill-handoff']],
+ ['AI 답변과 실행이 헷갈려',['base-agent','base-extensions','base-skill','base-api']],
+ ['움직임을 조절하고 싶어',['ui-transition','ui-stagger','ui-hover','ui-micro']]
 ];
 const situationExamples={
  '어디서 시작하지?':['시험 일정 도구를 만들고 싶은데 첫 요청을 어떻게 쓰지?','누가 쓰고 무엇을 입력할지부터 정하고 싶어.'],
@@ -39,7 +41,9 @@ const situationExamples={
  '할 일이 너무 커 보여':['일정 등록부터 검색까지 한 번에 맡기기 어려워.','작은 작업으로 나누고 무엇부터 할지 알고 싶어.'],
  '무엇이 바뀌었는지 보고 싶어':['어제 버전과 오늘 버전의 차이를 보고 싶어.','검토할 사람에게 수정 이유와 확인 결과를 전달해야 해.'],
  '설명이 너무 어려워':['상태나 렌더링이 실제 화면에서 무슨 뜻인지 모르겠어.','방금 설명을 쉬운 말과 예시로 다시 듣고 싶어.'],
- '같은 일을 매번 설명해':['회의 메모 정리 방법을 매번 다시 알려주고 있어.','잘된 작업 순서를 다음에도 재사용하고 싶어.']
+ '같은 일을 매번 설명해':['회의 메모 정리 방법을 매번 다시 알려주고 있어.','잘된 작업 순서를 다음에도 재사용하고 싶어.'],
+ 'AI 답변과 실행이 헷갈려':['방법만 설명한 것인지 실제로 작업했는지 알고 싶어.','스킬·플러그인·MCP가 각각 무엇을 하는지 모르겠어.'],
+ '움직임을 조절하고 싶어':['카드가 더 천천히, 잠깐 기다렸다 나타나게 하고 싶어.','처음에는 빠르고 끝에서는 천천히 움직이게 하고 싶어.']
 };
 function counts(t){return t==='전체'?ITEMS.length:t==='즐겨찾기'?record.favorites.length:ITEMS.filter(i=>i.type===t).length;}
 function renderControls(){
@@ -79,12 +83,14 @@ function detail(id){const t=ITEMS.find(x=>x.id===id);if(!t)return;activeItem=t;r
  const prompt=t.prompt.replace(/^成功/,'성공');
  let body=`<span class="en">${esc(t.en)} · ${esc(t.level)}</span><p>${esc(t.description)}</p>${t.when?`<h3>언제 쓰나요?</h3><p>${esc(t.when)}</p>`:''}`;
  if(t.type==='스킬')body+=`<div class="notice">${t.verified?'GitHub 스킬 원문 확인 · 2026.10.27':'기존 사전 수록 · 개별 스킬의 최신 원문·설치 절차는 재확인 필요'}<br>스킬 설치·도구 연결은 이 가이드북이 실행하지 않습니다. Codex에서는 설치된 스킬을 이름으로 요청하거나 $로 선택할 수 있습니다. 다른 도구에서는 호출 방식이 다를 수 있습니다.</div>`;
+ if(t.motionControls)body+=`<h3>움직임 조절값 읽기</h3><p>동작 시간은 한 번 움직이는 데 걸리는 시간, 시작 지연은 움직이기 전 기다리는 시간입니다. 1000ms는 1초입니다. 스태거의 카드 간격은 다음 카드가 등장하기까지의 시간차입니다. 가속감은 일정하게 움직일지 끝에서 천천히 멈출지 정합니다.</p><p>아래 요청문은 기본값 예시입니다. 카드에서 바꾼 값에 맞게 숫자와 가속감을 수정해 사용하세요.</p>`;
  body+=promptBlock(t.demo?'만들기 요청문':'실전에 쓸 요청문',prompt,'prompt');
  if(t.edit)body+=promptBlock('수정 요청문',t.edit,'edit');
  if(t.keywords)body+=`<h3>코드에서 찾을 단어</h3><p>편집기에서 Ctrl+F로 검색할 때 참고하세요.</p><code>${esc(t.keywords)}</code>`;
  if(t.caution)body+=`<h3>사용 조건·주의할 점</h3><p>${esc(t.caution)}</p>`;
  if(t.experience)body+=`<h3>이 카드에서는 무엇을 보나요?</h3><p>${esc(t.experience.note)}</p><p>이 예제는 이해를 돕기 위한 설명이며 실제 스킬의 실행 결과가 아닙니다.</p>`;
  body+=`<h3>출처</h3><p>${t.sourceUrl?`<a href="${esc(t.sourceUrl)}" target="_blank" rel="noopener noreferrer">${esc(t.source)} ↗</a>`:esc(t.source)}</p>`;
+ if(t.sourceLinks?.length)body+=t.sourceLinks.map(s=>`<p><a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title)} ↗</a></p>`).join('');
  if(t.type==='스킬')body+=`<p class="source-tag">저장소의 인기는 개별 스킬의 품질을 보장하지 않습니다. 수록 항목을 모두 설치할 필요는 없습니다.</p>`;
  if(t.originalInstall)body+=`<details><summary>기존 사전의 설치 참고 내용</summary><p>원문 보존용입니다. 현재 환경에서 검증한 설치 명령이 아닙니다. 공식 저장소의 최신 안내와 변경 내용을 먼저 확인하세요.</p><code>${esc(t.originalInstall)}</code></details>`;
  if(t.originalDescription)body+=`<details><summary>이전 버전 설명 보기</summary><p>${esc(t.originalDescription)}</p></details>`;
@@ -92,7 +98,7 @@ function detail(id){const t=ITEMS.find(x=>x.id===id);if(!t)return;activeItem=t;r
 }
 async function copyText(text){try{if(navigator.clipboard&&window.isSecureContext)await navigator.clipboard.writeText(text);else{const a=document.createElement('textarea');a.value=text;a.style.cssText='position:fixed;left:0;top:0;opacity:0';$('#drawer-body').append(a);a.select();if(!document.execCommand('copy'))throw Error('copy');a.remove();}toast('요청문을 복사했어요. 필요한 항목을 바꿔 사용하세요.');}catch{const area=document.createElement('textarea');area.value=text;area.readOnly=true;$('#drawer-body').append(area);area.focus();area.select();toast('자동 복사가 제한됩니다. 선택한 내용을 직접 복사해 주세요.');}}
 function manage(){openDrawer('즐겨찾기·기록 관리','THIS BROWSER',`<p>즐겨찾기 ${record.favorites.length}개</p><div class="notice">이 브라우저에만 저장합니다. PC·휴대폰 자동 동기화는 제공하지 않습니다. 브라우저 데이터 삭제·시크릿 모드·다른 주소에서는 기록이 유지되지 않을 수 있습니다.${storageAvailable?'':' 현재 브라우저에서 저장을 사용할 수 없습니다.'}</div><h3>기기를 바꿀 때</h3><p>기록 파일을 내보내 다른 기기로 옮긴 뒤 가져오세요. 기존 기록과 합쳐집니다. 파일에는 카드 번호와 최근 위치가 들어갑니다. 이전 버전의 학습 표시 데이터도 지우지 않고 보존합니다.</p><div class="tools"><button data-export class="primary">기록 내보내기</button><label class="file-label">기록 가져오기<input type="file" id="import-file" accept="application/json,.json"></label></div>${record.last?`<h3>최근 본 카드</h3><button data-resume="${record.last}">${esc(ITEMS.find(t=>t.id===record.last)?.title)}</button>`:''}`);}
-function about(){openDrawer('보고, 눌러 보고, 요청하기','ABOUT THIS GUIDE',`<p>원본 UI 사전의 검색·분류·카드와 동작 체험을 유지하고, 요청문과 자세한 설명을 드로어로 분리했습니다.</p><h3>자료 구성</h3><p>사용자 제공 UI 용어 24개, 기존 스킬 35개, 기초 개념 16개, 추가 스킬 3개로 총 78개입니다. 기존 항목의 설명과 설치 참고 내용은 보존했습니다.</p><h3>자료의 확인 상태</h3><p>추가 스킬 3개와 기존 스킬 5개의 SKILL.md는 2026년 10월 27일 확인했습니다. 나머지 기존 항목은 최신 원문 재확인이 필요한 것으로 표시합니다. 별점 수치를 품질 순위로 표시하지 않습니다.</p><p><a href="https://learn.chatgpt.com/docs/build-skills" target="_blank" rel="noopener">OpenAI 공식 스킬 안내</a><br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Your_first_website" target="_blank" rel="noopener">MDN 웹 개발 입문</a><br><a href="https://git-scm.com/docs/gittutorial" target="_blank" rel="noopener">Git 공식 입문</a></p><h3>회사에서 사용하기</h3><p>로그인과 AI 연결 없이 열립니다. 외부 글꼴·분석 서비스·CDN을 사용하지 않습니다. 출처 링크를 누르면 외부 사이트로 이동합니다. 회사망·휴대폰 실제 기기 접근은 별도 확인이 필요합니다.</p><h3>체험과 실제 작업의 차이</h3><p>UI 체험은 이 화면 안에서만 작동합니다. 개발 개념·스킬 체험은 학습용 예시이며 실제 도구 실행이나 성능 측정값이 아닙니다. </p>`);}
+function about(){openDrawer('보고, 눌러 보고, 요청하기','ABOUT THIS GUIDE',`<p>원본 UI 사전의 검색·분류·카드와 동작 체험을 유지하고, 요청문과 자세한 설명을 드로어로 분리했습니다.</p><h3>자료 구성</h3><p>사용자 제공 UI 용어 24개, 기존 스킬 35개, 기초 개념 18개, 추가 스킬 3개로 총 80개입니다. 기존 항목의 설명과 설치 참고 내용은 보존했습니다. v1.2에서 AI 에이전트와 스킬·플러그인·MCP 비교를 추가하고, 기존 움직임 체험의 시간·지연·가속감을 조절할 수 있게 했습니다.</p><h3>자료의 확인 상태</h3><p>추가 스킬 3개와 기존 스킬 5개의 SKILL.md는 2026년 10월 27일 확인했습니다. 나머지 기존 항목은 최신 원문 재확인이 필요한 것으로 표시합니다. 별점 수치를 품질 순위로 표시하지 않습니다.</p><p><a href="https://learn.chatgpt.com/docs/build-skills" target="_blank" rel="noopener">OpenAI 공식 스킬 안내</a><br><a href="https://developer.mozilla.org/en-US/docs/Learn_web_development/Getting_started/Your_first_website" target="_blank" rel="noopener">MDN 웹 개발 입문</a><br><a href="https://git-scm.com/docs/gittutorial" target="_blank" rel="noopener">Git 공식 입문</a></p><h3>회사에서 사용하기</h3><p>로그인과 AI 연결 없이 열립니다. 외부 글꼴·분석 서비스·CDN을 사용하지 않습니다. 출처 링크를 누르면 외부 사이트로 이동합니다. 회사망·휴대폰 실제 기기 접근은 별도 확인이 필요합니다.</p><h3>체험과 실제 작업의 차이</h3><p>UI 체험은 이 화면 안에서만 작동합니다. 개발 개념·스킬 체험은 학습용 예시이며 실제 도구 실행이나 성능 측정값이 아닙니다. </p>`);}
 document.addEventListener('click',e=>{
  const b=e.target.closest('button');if(!b)return;
  if(b.hasAttribute('data-exp-action')){experienceAction(b);return;}
