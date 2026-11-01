@@ -39,7 +39,7 @@ function experienceView(t){const e=t.experience,s=expState(t.id);let body='';
  case 'accessibility':body=`${expChoices(['안내 없음','안내 있음'],s.choice)}<div class="a11y-demo">${s.choice?'<label>시험명</label>':''}<input aria-label="${s.choice?'시험명 예제':'안내 없는 예제 입력칸'}" placeholder="${s.choice?'예: 내구 시험':'입력'}" readonly>${s.choice?'<small>필수 항목입니다. 시험명을 입력하세요.</small>':'<small>무엇을 입력해야 할까요?</small>'}</div>`;break;
  default:throw new Error('Unknown experience: '+e.kind);
  }
- return `<div class="experience" data-exp="${t.id}" data-kind="${e.kind}"><div class="exp-content">${body}</div><p class="exp-note">${esc(e.note)}</p></div>`;
+ return `<div class="experience ${e.kind==='agent'&&s.choice&&s.ran?'agent-finished':''}" data-exp="${t.id}" data-kind="${e.kind}"><div class="exp-content">${body}</div><p class="exp-note">${esc(e.note)}</p></div>`;
 }
 function experienceAction(b){const owner=b.closest('[data-exp]');if(!owner)return;const t=ITEMS.find(x=>x.id===owner.dataset.exp),s=expState(t.id),a=b.dataset.expAction,choice=Number(b.dataset.choice);const input=owner.querySelector('[data-exp-input]');if(input)s.input=input.value;
  if(a==='choice')s.choice=choice;

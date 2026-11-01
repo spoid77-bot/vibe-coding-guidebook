@@ -31,6 +31,7 @@
 .experience[data-kind=agent] .prototype-table{margin-top:0}
 .experience[data-kind=agent] .prototype-table>div{padding:2px 6px;font-size:9px;line-height:1.4}
 .experience[data-kind=agent] .exp-actions{margin-top:4px}
+.experience.agent-finished .request-bubble{display:none}
 #mobile-menu{display:none}
 .workspace .situations .chip-row{gap:6px;flex-wrap:wrap}
 .workspace .situation{font-size:11px;padding:4px 10px;background:#fff;border-color:#dce3d6}
